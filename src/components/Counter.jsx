@@ -1,18 +1,30 @@
 import React from "react";
-import { useState, useEffect } from "react";
+// import { useState } from "react";
+import { Button, Badge } from "react-bootstrap";
 
-const Counter = () => {
-    const [num, setNum] = useState(0);
-    const [image, setImage] = useState("https://picsum.photos/200");
-    const handleIncreament = () => {
-        setNum(num + 1);
-    };
+const Counter = (props) => {
+    const num = props.counter.value;
+
     return (
         <div>
-            <img src={image} alt="random image" />
-            <button onClick={() => setNum(num - 1)}>-</button>
-            {num === 0 ? "Zero" : num}
-            <button onClick={handleIncreament}>+</button>
+            <Button onClick={() => props.onDecreament(props.counter)} size="sm">
+                {" "}
+                -{" "}
+            </Button>
+            <Badge bg={num === 0 ? "warning" : "primary"}>
+                {num === 0 ? "zero" : num}
+            </Badge>
+            <Button onClick={() => props.onIncreament(props.counter)} size="sm">
+                {" "}
+                +{" "}
+            </Button>
+            <Button
+                onClick={() => props.onDelete(props.counter.id)}
+                variant="danger"
+                size="sm"
+            >
+                Delete
+            </Button>
         </div>
     );
 };
